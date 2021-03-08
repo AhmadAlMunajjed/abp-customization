@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Data;
 
 namespace Whyzr
 {
@@ -10,6 +11,8 @@ namespace Whyzr
     {
         public static int Main(string[] args)
         {
+            AbpCommonDbProperties.DbTablePrefix = WhyzrConsts.DbTablePrefix;
+
             Log.Logger = new LoggerConfiguration()
 #if DEBUG
                 .MinimumLevel.Debug()

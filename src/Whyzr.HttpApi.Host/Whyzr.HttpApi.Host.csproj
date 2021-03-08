@@ -31,9 +31,13 @@
 
   <ItemGroup>
     <Compile Remove="Logs\**" />
+    <Compile Remove="wwwroot\images\**" />
     <Content Remove="Logs\**" />
+    <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Logs\**" />
+    <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,8 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using Whyzr.IdentityServer;
+using IdentityServer4.Services;
 
 namespace Whyzr
 {
@@ -38,9 +40,12 @@ namespace Whyzr
                 options.IsEnabled = MultiTenancyConsts.IsEnabled;
             });
 
+            context.Services.AddTransient<IProfileService, CustomProfileService>();
+
 #if DEBUG
             context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
 #endif
         }
+
     }
 }

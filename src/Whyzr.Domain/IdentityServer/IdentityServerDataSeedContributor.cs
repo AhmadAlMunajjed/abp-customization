@@ -13,6 +13,7 @@ using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.Uow;
 using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
 using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
@@ -77,7 +78,11 @@ namespace Whyzr.IdentityServer
                 "name",
                 "phone_number",
                 "phone_number_verified",
-                "role"
+                "role",
+                AbpClaimTypes.Name,
+                AbpClaimTypes.SurName,
+                AbpClaimTypes.ClientId,
+                AbpClaimTypes.EditionId
             };
 
             await CreateApiResourceAsync("Whyzr", commonApiUserClaims);
@@ -244,10 +249,11 @@ namespace Whyzr.IdentityServer
                         Description = name,
                         AlwaysIncludeUserClaimsInIdToken = true,
                         AllowOfflineAccess = true,
-                        AbsoluteRefreshTokenLifetime = 31536000, //365 days
-                        AccessTokenLifetime = 31536000, //365 days
+                        // AbsoluteRefreshTokenLifetime = 2592000, // 30 days - default
+                        AccessTokenLifetime = 900, // 15 mintues
                         AuthorizationCodeLifetime = 300,
                         IdentityTokenLifetime = 300,
+                        // SlidingRefreshTokenLifetime = 1296000, // 15 days- default
                         RequireConsent = false,
                         FrontChannelLogoutUri = frontChannelLogoutUri,
                         RequireClientSecret = requireClientSecret,

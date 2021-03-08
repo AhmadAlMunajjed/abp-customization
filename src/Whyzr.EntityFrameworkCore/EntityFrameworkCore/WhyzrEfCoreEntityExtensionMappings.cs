@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
+using Whyzr.Users;
 
 namespace Whyzr.EntityFrameworkCore
 {
@@ -39,6 +41,33 @@ namespace Whyzr.EntityFrameworkCore
                  * See the documentation for more:
                  * https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Extending-Entities
                  */
+
+                ObjectExtensionManager.Instance
+                   .MapEfCoreProperty<IdentityUser, UserType>(
+                       "Type",
+                       (entityBuilder, propertyBuilder) =>
+                       {
+
+                       }
+                   );
+
+                ObjectExtensionManager.Instance
+                   .MapEfCoreProperty<IdentityUser, Guid?>(
+                       "TypeId",
+                       (entityBuilder, propertyBuilder) =>
+                       {
+
+                       }
+                   );
+
+                ObjectExtensionManager.Instance
+                   .MapEfCoreProperty<IdentityUser, string>(
+                       "AppName",
+                       (entityBuilder, propertyBuilder) =>
+                       {
+                           propertyBuilder.HasMaxLength(128);
+                       }
+                   );
             });
         }
     }

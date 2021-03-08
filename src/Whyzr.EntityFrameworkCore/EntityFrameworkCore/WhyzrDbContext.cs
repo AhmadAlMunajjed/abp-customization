@@ -36,12 +36,14 @@ namespace Whyzr.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
+            AbpCommonDbProperties.DbTablePrefix = WhyzrConsts.DbTablePrefix;
+
             /* Configure the shared tables (with included modules) here */
 
             builder.Entity<AppUser>(b =>
             {
                 b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
+
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();
 

@@ -222,8 +222,6 @@ namespace Whyzr
             app.UseSwagger();
             app.UseAbpSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Whyzr API");
-
                 var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
                 c.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
                 c.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);

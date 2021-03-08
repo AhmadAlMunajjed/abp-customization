@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
+using Whyzr.Users;
 
 namespace Whyzr
 {
@@ -67,6 +69,35 @@ namespace Whyzr
              * See the documentation for more:
              * https://docs.abp.io/en/latest/Module-Entity-Extensions
              */
+
+            ObjectExtensionManager.Instance.Modules()
+                  .ConfigureIdentity(identity =>
+                  {
+                      identity.ConfigureUser(user =>
+                      {
+                          user.AddOrUpdateProperty<UserType>(
+                              "Type", 
+                              property =>
+                              {
+                              }
+                          );
+                      });
+                  });
+
+            ObjectExtensionManager.Instance.Modules()
+                  .ConfigureIdentity(identity =>
+                  {
+                      identity.ConfigureUser(user =>
+                      {
+                          user.AddOrUpdateProperty<Guid?>(
+                              "TypeId",
+                              property =>
+                              {
+
+                              }
+                          );
+                      });
+                  });
         }
     }
 }

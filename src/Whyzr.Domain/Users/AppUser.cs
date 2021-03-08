@@ -59,5 +59,14 @@ namespace Whyzr.Users
         {
             
         }
+
+        public UserType Type { get; set; }
+
+        /// <summary>
+        /// Target id
+        /// </summary>
+        public Guid? TypeId { get; set; }
+
+        public string AppName { get; set; }
     }
 }
